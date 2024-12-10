@@ -5,7 +5,7 @@ Tags: amazon, reviews, amazon reviews, ratings, recommendations
 Requires at least: 3.0.1
 Tested up to: 6.7
 Requires PHP: 5.2
-Stable tag: 12.4.6
+Stable tag: 12.4.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Plugin Name: Widgets for Amazon Reviews
@@ -14,7 +14,7 @@ Plugin URI: https://wordpress.org/plugins/review-widgets-for-amazon/
 Author: Trustindex.io <support@trustindex.io>
 Author URI: https://www.trustindex.io/
 Text Domain: review-widgets-for-amazon
-Version: 12.4.6
+Version: 12.4.7
 
 Embed Amazon reviews fast and easily into your WordPress site. Increase SEO, trust and sales using Amazon reviews.
 
