@@ -204,7 +204,7 @@ $styleId = (int)$_REQUEST['style_id'];
 update_option($pluginManagerInstance->get_option_name('style-id'), $styleId, false);
 delete_option($pluginManagerInstance->get_option_name('review-content'));
 trustindex_plugin_change_step(3);
-if (in_array($styleId, [ 17, 21, 52, 53 ])) {
+if (in_array($styleId, [17, 21, 52, 53, 112])) {
 $pluginManagerInstance->noreg_save_css();
 }
 if (isset($_GET['style_id'])) {
@@ -428,7 +428,7 @@ __('Insert code', 'trustindex-plugin')
 ];
 $stepDone = 0;
 $stepCurrent = isset($_GET['step']) ? (int)sanitize_text_field($_GET['step']) : 0;
-if ($stepCurrent === 3 && in_array($styleId, [ 17, 21, 52, 53 ])) {
+if ($stepCurrent === 3 && in_array($styleId, [17, 21, 52, 53, 112])) {
 $stepCurrent = 4;
 }
 if ($widgetSettedUp) {
@@ -506,7 +506,7 @@ echo sprintf(__("You have connected your Trustindex account, so you can find pre
 <h1 class="ti-header-title"><?php echo sprintf(__('Connect %s', 'trustindex-plugin'), 'Amazon'); ?></h1>
 <?php if ($pluginManagerInstance->is_noreg_linked()): ?>
 <div class="ti-source-box">
-<?php if (isset($pageDetails['avatar_url'])): ?>
+<?php if (isset($pageDetails['avatar_url']) && $pageDetails['avatar_url']): ?>
 <img src="<?php echo esc_url($pageDetails['avatar_url']); ?>" />
 <?php endif; ?>
 <div class="ti-source-info">
@@ -747,7 +747,7 @@ $className = 'ti-half-width';
 <div class="ti-box-inner">
 <div class="ti-box-header">
 <?php echo __('Widget Preview', 'trustindex-plugin'); ?>
-<?php if (!in_array($styleId, [ 17, 21, 52, 53 ])): ?>
+<?php if (!in_array($styleId, [17, 21, 52, 53, 112])): ?>
 <span class="ti-box-header-normal ti-pull-right">
 <?php echo __('Style', 'trustindex-plugin'); ?>:
 <strong><?php echo esc_html(__($pluginManager::$widget_styles[ $scssSet ]['name'], 'trustindex-plugin')); ?></strong>
@@ -793,15 +793,12 @@ $className = 'ti-half-width';
 <?php if ($pluginManagerInstance->isLayoutHasReviews()): ?>
 <div class="ti-form-group">
 <label><?php echo __('Filter your ratings', 'trustindex-plugin'); ?></label>
-<form method="post" action="">
-<input type="hidden" name="command" value="save-filter-stars" />
-<?php wp_nonce_field('ti-save-filter-stars'); ?>
-<select class="ti-form-control" name="stars">
-<option value="1,2,3,4,5"<?php if (count($filter['stars']) > 2): ?> selected<?php endif; ?>><?php echo esc_html(__('Show all', 'trustindex-plugin')); ?></option>
-<option value="4,5"<?php if (count($filter['stars']) === 2): ?> selected<?php endif; ?>>&starf;&starf;&starf;&starf; - &starf;&starf;&starf;&starf;&starf;</option>
-<option value="5"<?php if (count($filter['stars']) === 1): ?> selected<?php endif; ?>><?php echo __('only', 'trustindex-plugin'); ?> &starf;&starf;&starf;&starf;&starf;</option>
+
+<select class="ti-form-control" disabled>
+<option value="1,2,3,4,5"><?php echo esc_html(__('Show all', 'trustindex-plugin')); ?></option>
 </select>
-</form>
+<br />
+<small class="ti-text-muted" style="padding-left: 5px"><?php echo sprintf(__('%s does not allow review filtering.', 'trustindex-plugin'), ucfirst($pluginManagerInstance->getShortName())); ?></small>
 </div>
 <?php endif; ?>
 <div class="ti-form-group">
@@ -846,7 +843,7 @@ break;
 </select>
 </form>
 </div>
-<?php if (!in_array($styleId, [ 17, 21, 52, 53 ])): ?>
+<?php if (!in_array($styleId, [17, 21, 52, 53, 112])): ?>
 <div class="ti-form-group">
 <label><?php echo __('Align', 'trustindex-plugin'); ?></label>
 <form method="post" action="">
